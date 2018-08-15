@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 const bodyParser = require('body-parser')
+require('child_process').spawn('sh', ['migration.sh'], {stdio: 'inherit'});
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
