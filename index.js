@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(require('./controllers'));
 
 app.listen(port, function() {
-  console.log(`Listening on ${ PORT }`);
+  console.log(`Listening on ${ port }`);
 });
 
 app.get('/', (req, res) => res.render('pages/index'));
