@@ -1,6 +1,6 @@
 var express = require('express')
   , router = express.Router()
 
-router.use('/login', require('./login/index'))
+router.get('/', (req, res) => res.render('pages/index'))
 
 module.exports = router
