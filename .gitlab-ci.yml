@@ -5,9 +5,6 @@ before_script:
 
 deploy:
     script:
-    - npm run deploy
-    - apt-get install -yqq ruby ruby-dev --silent
-    - gem install dpl
-    - dpl --provider=heroku --app=adsserver --api-key=f2d0fae9-cc5d-4849-98ea-0b3cb89610f0
+    - git push origin master
     only:
     - master
