@@ -2,9 +2,4 @@ before_script:
     - apt-get -qq update
     - npm set progress=false
     - npm install --silent
-
-deploy:
-    script:
-    - git push origin master
-    only:
-    - master
+    - git push heroku master
