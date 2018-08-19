@@ -10,8 +10,7 @@ module.exports = {
       },
       role: {
         type: Sequelize.STRING,
-        allowNull: false,
-        primaryKey: true
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +28,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       }
+    }).then(() => {
+      queryInterface.addConstraint('Roles', ['role'], {
+        type: 'unique',
+        name: 'Roles_unique_role'
+      });
     });
   },
   down: (queryInterface, Sequelize) => {

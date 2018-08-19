@@ -11,7 +11,6 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
         references: { model: 'Users', key: 'id' }
       },
       city: {
@@ -53,6 +52,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       }
+    }).then(() => {
+      queryInterface.addConstraint('Publishers', ['userId'], {
+        type: 'unique',
+        name: 'Publishers_unique_userId'
+      });
     });
   },
   down: (queryInterface, Sequelize) => {
