@@ -1,29 +1,40 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Users = sequelize.define('Users', {
+  var Admins = sequelize.define('Admins', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastName: {
-      type: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
+      references: { model: 'Users', key: 'id' }
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    password: {
+    city: {
       type: DataTypes.STRING
     },
-    contact: {
+    state: {
       type: DataTypes.STRING
+    },
+    country: {
+      type: DataTypes.STRING
+    },
+    birthDate: {
+      type: DataTypes.DATE
+    },
+    occupation: {
+      type: DataTypes.STRING
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      default: true
+    },
+    points: {
+      type: DataTypes.INTEGER,
+      default: 0
     },
     createdAt: {
       allowNull: false,
@@ -44,9 +55,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: true
   });
-  Users.associate = function(models) {
-    // associations can be defined hered
-    Users.hasOne(models.Publishers, { foreignKey: 'userId' });
+  Admins.associate = function(models) {
+    // associations can be defined here
+    Admins.hasOne(models.Users, {as: "User"});
   };
-  return Users;
+  return Admins;
 };
