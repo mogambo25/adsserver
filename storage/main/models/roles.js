@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Roles.associate = function(models) {
     // associations can be defined here
+    Roles.hasMany(models.AdminRoles, {foreignKey: 'roleId', sourceKey: 'id'});
   };
   return Roles;
 };

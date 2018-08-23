@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Admins = sequelize.define('Admins', {
+  var Ads = sequelize.define('Ads', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -10,31 +10,20 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
       references: { model: 'Users', key: 'id' }
     },
-    city: {
+    title: {
       type: DataTypes.STRING
     },
-    state: {
+    description: {
       type: DataTypes.STRING
     },
-    country: {
-      type: DataTypes.STRING
-    },
-    birthDate: {
-      type: DataTypes.DATE
-    },
-    occupation: {
+    ageGroup: {
       type: DataTypes.STRING
     },
     isActive: {
       type: DataTypes.BOOLEAN,
       default: true
-    },
-    points: {
-      type: DataTypes.INTEGER,
-      default: 0
     },
     createdAt: {
       allowNull: false,
@@ -55,10 +44,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: true
   });
-  Admins.associate = function(models) {
+  Ads.associate = function(models) {
     // associations can be defined here
-    Admins.hasOne(models.Users, {as: "User"});
-    Admins.hasMany(models.AdminRoles, {foreignKey: 'adminId', sourceKey: 'id'});
+    Ads.belongsTo(models.Users, {foreignKey: 'userId', targetKey: 'id'});
+    Ads.hasMany(models.AdsMedia, {foreignKey: 'adId', sourceKey: 'id'});
   };
-  return Admins;
+  return Ads;
 };

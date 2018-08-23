@@ -58,8 +58,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   AdminRoles.associate = function(models) {
     // associations can be defined here
-    AdminRoles.belongsTo(models.Roles, {foreignKey: 'roleId'});
-    AdminRoles.belongsTo(models.Admins, {foreignKey: 'adminId'});
+    AdminRoles.belongsTo(models.Roles, {foreignKey: 'roleId', targetKey: 'id'});
+    AdminRoles.belongsTo(models.Admins, {foreignKey: 'adminId', targetKey: 'id'});
   };
   return AdminRoles;
 };

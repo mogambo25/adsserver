@@ -1,29 +1,29 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Users = sequelize.define('Users', {
+  var AdsMedia = sequelize.define('AdsMedia', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastName: {
-      type: DataTypes.STRING,
+    adId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      references: { model: 'Ads', key: 'id' }
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    password: {
+    media: {
       type: DataTypes.STRING
     },
-    contact: {
+    mediaURL: {
       type: DataTypes.STRING
+    },
+    mediaType: {
+      type: DataTypes.STRING
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      default: true
     },
     createdAt: {
       allowNull: false,
@@ -44,9 +44,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: true
   });
-  Users.associate = function(models) {
-    // associations can be defined hered
-    Users.hasOne(models.Publishers, { foreignKey: 'userId' });
+  AdsMedia.associate = function(models) {
+    // associations can be defined here
+    AdsMedia.belongsTo(models.Ads, {foreignKey: 'adId', targetKey: 'id'});
   };
-  return Users;
+  return AdsMedia;
 };
