@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Ads', {
+    return queryInterface.createTable('Rewards', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,31 +13,22 @@ module.exports = {
         allowNull: false,
         references: { model: 'Users', key: 'id' }
       },
-      title: {
+      adId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.STRING
+        references: { model: 'Ads', key: 'id' }
       },
-      description: {
-        type: Sequelize.STRING
-      },
-      ageGroup: {
-        type: Sequelize.STRING
-      },
-      views: {
+      beforeRewards: {
         type: Sequelize.INTEGER,
-        defaultValue: 0
+        allowNull: false
       },
-      downloads: {
+      rewardPoints: {
         type: Sequelize.INTEGER,
-        defaultValue: 0
+        allowNull: false
       },
-      rating: {
-        type: Sequelize.DOUBLE,
-        defaultValue: 0
-      },
-      isActive: {
-        type: Sequelize.BOOLEAN,
-        default: true
+      afterRewards: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -58,6 +49,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Ads');
+    return queryInterface.dropTable('Rewards');
   }
 };
